@@ -1,157 +1,670 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Payroll Calculator – Mauritius (2025)</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #eef2f5;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 960px;
-            margin: 50px auto;
-            background: #ffffff;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        h1 {
-            text-align: center;
-            color: #003366;
-            margin-bottom: 30px;
-        }
-        label {
-            margin-top: 15px;
-            display: block;
-            font-weight: 600;
-        }
-        input, select {
-            width: 100%;
-            padding: 12px;
-            margin-top: 8px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-        }
-        button {
-            margin-top: 25px;
-            padding: 12px 30px;
-            background-color: #0066cc;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        #result {
-            margin-top: 40px;
-            padding: 25px;
-            background: #f0fdf4;
-            border-left: 6px solid #28a745;
-            border-radius: 8px;
-        }
-        .summary p {
-            margin: 8px 0;
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NW Solutions – WhatsApp Broadcast</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --green: #25D366;
+    --green-dark: #128C7E;
+    --green-light: #dcfce7;
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #21262d;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #25D366;
+    --danger: #f85149;
+    --radius: 12px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 0 0 60px;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, #0a2e1a 0%, #0d1117 60%);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 20px 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+  }
+
+  .logo-icon {
+    width: 42px; height: 42px;
+    background: var(--green);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+    box-shadow: 0 0 20px rgba(37,211,102,0.35);
+  }
+
+  header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(18px, 5vw, 24px);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+  }
+  header h1 span { color: var(--green); }
+  header p { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 640px; margin: 0 auto; padding: 20px 16px; }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    margin-bottom: 16px;
+  }
+  .card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-title .dot {
+    width: 7px; height: 7px;
+    background: var(--green);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  /* ── TEXTAREA ── */
+  textarea {
+    width: 100%;
+    min-height: 130px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    padding: 14px;
+    resize: vertical;
+    transition: border 0.2s;
+    outline: none;
+    line-height: 1.6;
+  }
+  textarea:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(37,211,102,0.12); }
+  textarea::placeholder { color: var(--muted); }
+
+  .char-count {
+    text-align: right;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+
+  /* ── BUTTONS ── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 11px 20px;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.18s;
+    text-decoration: none;
+  }
+  .btn-primary {
+    background: var(--green);
+    color: #000;
+    width: 100%;
+    font-size: 16px;
+    padding: 15px;
+    border-radius: 10px;
+    letter-spacing: 0.3px;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.3);
+  }
+  .btn-primary:hover { background: #20c45a; transform: translateY(-1px); box-shadow: 0 6px 24px rgba(37,211,102,0.4); }
+  .btn-primary:active { transform: translateY(0); }
+  .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+
+  .btn-send {
+    background: rgba(37,211,102,0.12);
+    color: var(--green);
+    border: 1px solid rgba(37,211,102,0.3);
+    padding: 7px 13px;
+    font-size: 12px;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+  .btn-send:hover { background: rgba(37,211,102,0.22); }
+
+  .btn-remove {
+    background: rgba(248,81,73,0.1);
+    color: var(--danger);
+    border: 1px solid rgba(248,81,73,0.25);
+    padding: 7px 10px;
+    font-size: 13px;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+  .btn-remove:hover { background: rgba(248,81,73,0.2); }
+
+  .btn-add {
+    background: var(--surface2);
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .btn-add:hover { border-color: var(--green); color: var(--green); }
+
+  /* ── ADD CONTACT FORM ── */
+  .add-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .add-row input {
+    flex: 1;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    padding: 10px 14px;
+    outline: none;
+    transition: border 0.2s;
+  }
+  .add-row input:focus { border-color: var(--green); }
+  .add-row input::placeholder { color: var(--muted); }
+
+  /* ── CONTACT LIST ── */
+  #contact-list { display: flex; flex-direction: column; gap: 8px; }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    transition: border-color 0.2s;
+    animation: slideIn 0.25s ease;
+  }
+  .contact-item:hover { border-color: rgba(37,211,102,0.3); }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .contact-avatar {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, #0a2e1a, #155724);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--green);
+    flex-shrink: 0;
+    font-family: 'Syne', sans-serif;
+  }
+
+  .contact-info { flex: 1; min-width: 0; }
+  .contact-name {
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .contact-number { font-size: 12px; color: var(--muted); }
+
+  .contact-actions { display: flex; gap: 6px; }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .stat {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--green);
+    line-height: 1;
+  }
+  .stat-label { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+  /* ── PROGRESS OVERLAY ── */
+  #progress-wrap {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(4px);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+  }
+  #progress-wrap.active { display: flex; }
+  .progress-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 30px 28px;
+    width: min(90vw, 340px);
+    text-align: center;
+  }
+  .progress-box h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    margin-bottom: 6px;
+  }
+  .progress-box p { font-size: 13px; color: var(--muted); margin-bottom: 18px; }
+  .progress-bar-outer {
+    background: var(--surface2);
+    border-radius: 99px;
+    height: 8px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+  .progress-bar-inner {
+    height: 100%;
+    background: var(--green);
+    border-radius: 99px;
+    transition: width 0.3s;
+    width: 0%;
+  }
+  .progress-count { font-size: 13px; color: var(--muted); }
+
+  #btn-cancel {
+    margin-top: 18px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 9px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    transition: all 0.2s;
+  }
+  #btn-cancel:hover { border-color: var(--danger); color: var(--danger); }
+
+  /* ── TOAST ── */
+  #toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: #1a3a2a;
+    border: 1px solid rgba(37,211,102,0.4);
+    color: var(--green);
+    padding: 11px 20px;
+    border-radius: 99px;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+    z-index: 300;
+    transition: transform 0.3s;
+    pointer-events: none;
+  }
+  #toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* ── EMPTY STATE ── */
+  .empty-state {
+    text-align: center;
+    padding: 30px 10px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .empty-state .icon { font-size: 32px; margin-bottom: 8px; }
+
+  /* ── NOTE ── */
+  .note {
+    background: rgba(37,211,102,0.07);
+    border: 1px solid rgba(37,211,102,0.2);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+  .note strong { color: var(--green); }
+
+  /* ── SEARCH ── */
+  #search-input {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    padding: 10px 14px;
+    outline: none;
+    transition: border 0.2s;
+    margin-bottom: 12px;
+  }
+  #search-input:focus { border-color: var(--green); }
+  #search-input::placeholder { color: var(--muted); }
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>Payroll Calculator – Mauritius (2025)</h1>
-        <label for="name">Employee Name</label>
-        <input type="text" id="name"/>
 
-        <label for="salary">Basic Monthly Salary (MUR)</label>
-        <input type="number" id="salary"/>
+<header>
+  <div class="logo-icon">💬</div>
+  <div>
+    <h1>NW <span>Solutions</span></h1>
+    <p>WhatsApp Broadcast Tool</p>
+  </div>
+</header>
 
-        <label for="daysWorked">Days Worked This Month</label>
-        <input type="number" id="daysWorked" max="31"/>
+<div class="container">
 
-        <label for="sickLeave">Sick Leave Taken</label>
-        <input type="number" id="sickLeave" max="15"/>
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stat">
+      <div class="stat-num" id="stat-contacts">0</div>
+      <div class="stat-label">Contacts</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" id="stat-sent">0</div>
+      <div class="stat-label">Sent Today</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" id="stat-chars">0</div>
+      <div class="stat-label">Msg Length</div>
+    </div>
+  </div>
 
-        <label for="dependents">Number of Dependents</label>
-        <select id="dependents">
-            <option value="0">0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4 or more</option>
-        </select>
+  <!-- MESSAGE -->
+  <div class="card">
+    <div class="card-title"><span class="dot"></span> Your Message</div>
+    <textarea id="message-box" placeholder="Type your broadcast message here…" maxlength="1000"></textarea>
+    <div class="char-count"><span id="char-num">0</span> / 1000</div>
+  </div>
 
-        <button onclick="calculatePayroll()">Calculate Payroll</button>
+  <!-- SEND ALL -->
+  <div class="note">
+    <strong>ℹ️ How it works:</strong> Each contact opens in a new WhatsApp tab with your message pre-filled. Your browser may ask you to allow pop-ups — please click <strong>Allow</strong> for all tabs to open.
+  </div>
 
-        <div id="result"></div>
+  <button class="btn btn-primary" id="btn-send-all" onclick="sendToAll()">
+    📤 Send to All Contacts
+  </button>
+
+  <br/><br/>
+
+  <!-- CONTACTS -->
+  <div class="card">
+    <div class="card-title"><span class="dot"></span> Contacts</div>
+
+    <!-- ADD FORM -->
+    <div class="add-row">
+      <input id="new-name" type="text" placeholder="Name (e.g. SuperDeals)" />
+      <input id="new-number" type="tel" placeholder="Number (e.g. 23058257539)" />
+      <button class="btn btn-add" onclick="addContact()">+ Add</button>
     </div>
 
-    <script>
-        function calculatePayroll() {
-            const name = document.getElementById("name").value;
-            const salary = parseFloat(document.getElementById("salary").value);
-            const daysWorked = parseInt(document.getElementById("daysWorked").value);
-            const sickLeave = parseInt(document.getElementById("sickLeave").value);
-            const dependents = parseInt(document.getElementById("dependents").value);
+    <!-- SEARCH -->
+    <input id="search-input" type="text" placeholder="🔍 Search contacts…" oninput="renderContacts()" />
 
-            const annualSalary = salary * 12;
+    <!-- LIST -->
+    <div id="contact-list"></div>
+  </div>
 
-            const deductions = [0, 120000, 200000, 290000, 375000];
-            const dependentDeduction = deductions[Math.min(dependents, 4)];
+</div>
 
-            const taxableIncome = Math.max(annualSalary - dependentDeduction, 0);
+<!-- PROGRESS OVERLAY -->
+<div id="progress-wrap">
+  <div class="progress-box">
+    <h2>📤 Sending…</h2>
+    <p id="progress-label">Opening WhatsApp for each contact</p>
+    <div class="progress-bar-outer">
+      <div class="progress-bar-inner" id="progress-bar"></div>
+    </div>
+    <div class="progress-count" id="progress-count">0 / 0</div>
+    <button id="btn-cancel" onclick="cancelSend()">✕ Cancel</button>
+  </div>
+</div>
 
-            const taxBrackets = [
-                { upTo: 400000, rate: 0 },
-                { upTo: 440000, rate: 0.02 },
-                { upTo: 500000, rate: 0.05 },
-                { upTo: 600000, rate: 0.08 },
-                { upTo: 800000, rate: 0.10 },
-                { upTo: 1100000, rate: 0.12 },
-                { upTo: 1500000, rate: 0.14 },
-                { upTo: 2000000, rate: 0.16 },
-                { upTo: Infinity, rate: 0.18 }
-            ];
+<!-- TOAST -->
+<div id="toast">✅ Done!</div>
 
-            let incomeLeft = taxableIncome;
-            let tax = 0;
-            let lower = 0;
+<script>
+// ─── DATA ───────────────────────────────────────────────
+let contacts = [
+  { id: 1, name: "Me (NW Solutions)", number: "23058100935" },
+  { id: 2, name: "SuperDeals",        number: "23058257539" },
+  { id: 3, name: "Toloto",            number: "23052587147" },
+  { id: 4, name: "SNZ",               number: "23052556614" },
+];
 
-            for (const bracket of taxBrackets) {
-                const range = bracket.upTo - lower;
-                const taxed = Math.min(incomeLeft, range);
-                tax += taxed * bracket.rate;
-                incomeLeft -= taxed;
-                lower = bracket.upTo;
-                if (incomeLeft <= 0) break;
-            }
+let sentToday = parseInt(localStorage.getItem('nw_sent_today') || '0');
+const todayKey = new Date().toDateString();
+if (localStorage.getItem('nw_sent_date') !== todayKey) {
+  sentToday = 0;
+  localStorage.setItem('nw_sent_date', todayKey);
+}
 
-            const monthlyTax = tax / 12;
-            const nsfEmployee = salary * 0.01;
-            const nsfEmployer = salary * 0.025;
-            const hrdc = salary * 0.015;
-            const prgf = salary * 0.045;
-            const netSalary = salary - monthlyTax - nsfEmployee;
+let cancelFlag = false;
+let nextId = 100;
 
-            document.getElementById("result").innerHTML = `
-                <div class="summary">
-                    <h3>Payroll Summary for ${name}</h3>
-                    <p><strong>Gross Salary:</strong> Rs ${salary.toFixed(2)}</p>
-                    <p><strong>Days Worked:</strong> ${daysWorked}</p>
-                    <p><strong>Sick Leave:</strong> ${sickLeave} day(s)</p>
-                    <p><strong>Annual Taxable Income:</strong> Rs ${taxableIncome.toLocaleString()}</p>
-                    <p><strong>Monthly Tax Deducted:</strong> Rs ${monthlyTax.toFixed(2)}</p>
-                    <p><strong>NSF (Employee):</strong> Rs ${nsfEmployee.toFixed(2)}</p>
-                    <p><strong>NSF (Employer):</strong> Rs ${nsfEmployer.toFixed(2)}</p>
-                    <p><strong>HRDC Levy (Employer):</strong> Rs ${hrdc.toFixed(2)}</p>
-                    <p><strong>PRGF (Employer):</strong> Rs ${prgf.toFixed(2)}</p>
-                    <hr />
-                    <p><strong>Net Salary (After Tax & NSF):</strong> Rs ${netSalary.toFixed(2)}</p>
-                </div>
-            `;
-        }
-    </script>
+// ─── RENDER ─────────────────────────────────────────────
+function renderContacts() {
+  const q = document.getElementById('search-input').value.toLowerCase();
+  const list = document.getElementById('contact-list');
+  const filtered = contacts.filter(c =>
+    c.name.toLowerCase().includes(q) || c.number.includes(q)
+  );
+
+  if (filtered.length === 0) {
+    list.innerHTML = `<div class="empty-state"><div class="icon">📭</div>No contacts found.</div>`;
+  } else {
+    list.innerHTML = filtered.map(c => {
+      const initials = c.name.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
+      return `
+      <div class="contact-item" id="ci-${c.id}">
+        <div class="contact-avatar">${initials}</div>
+        <div class="contact-info">
+          <div class="contact-name">${escHtml(c.name)}</div>
+          <div class="contact-number">+${c.number}</div>
+        </div>
+        <div class="contact-actions">
+          <button class="btn btn-send" onclick="sendOne(${c.id})">📨 Send</button>
+          <button class="btn btn-remove" onclick="removeContact(${c.id})">✕</button>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  updateStats();
+}
+
+function updateStats() {
+  document.getElementById('stat-contacts').textContent = contacts.length;
+  document.getElementById('stat-sent').textContent = sentToday;
+  const msg = document.getElementById('message-box').value;
+  document.getElementById('stat-chars').textContent = msg.length;
+  document.getElementById('char-num').textContent = msg.length;
+}
+
+// ─── FORMATTING ─────────────────────────────────────────
+function formatNumber(raw) {
+  // Remove everything except digits
+  let n = raw.replace(/\D/g, '');
+  // If starts with +, leading + was stripped above — fine
+  // Ensure has country code (default 230 for Mauritius)
+  if (n.startsWith('230') && n.length >= 11) return n;
+  if (n.length === 8) return '230' + n; // local Mauritius numbers
+  return n; // already has country code (other countries)
+}
+
+function buildLink(number, message) {
+  const num = formatNumber(number);
+  const encoded = encodeURIComponent(message);
+  return `https://wa.me/${num}?text=${encoded}`;
+}
+
+// ─── SEND ALL ───────────────────────────────────────────
+async function sendToAll() {
+  const msg = document.getElementById('message-box').value.trim();
+  if (!msg) { showToast('⚠️ Please type a message first!', '#e6a817'); return; }
+  if (contacts.length === 0) { showToast('⚠️ No contacts to send to!', '#e6a817'); return; }
+
+  cancelFlag = false;
+  const total = contacts.length;
+  let done = 0;
+
+  const wrap = document.getElementById('progress-wrap');
+  const bar  = document.getElementById('progress-bar');
+  const cnt  = document.getElementById('progress-count');
+  const lbl  = document.getElementById('progress-label');
+
+  wrap.classList.add('active');
+  bar.style.width = '0%';
+  cnt.textContent = `0 / ${total}`;
+
+  for (const c of contacts) {
+    if (cancelFlag) break;
+    lbl.textContent = `Opening: ${c.name}`;
+    const link = buildLink(c.number, msg);
+    window.open(link, '_blank');
+    done++;
+    const pct = Math.round((done / total) * 100);
+    bar.style.width = pct + '%';
+    cnt.textContent = `${done} / ${total}`;
+    // Small delay so browser doesn't block all pop-ups at once
+    await delay(500);
+  }
+
+  wrap.classList.remove('active');
+
+  if (!cancelFlag) {
+    sentToday += done;
+    localStorage.setItem('nw_sent_today', sentToday);
+    updateStats();
+    showToast(`✅ Opened ${done} WhatsApp chat${done !== 1 ? 's' : ''}!`);
+  } else {
+    showToast('🚫 Cancelled – ' + done + ' sent');
+  }
+}
+
+function cancelSend() { cancelFlag = true; }
+
+// ─── SEND ONE ───────────────────────────────────────────
+function sendOne(id) {
+  const msg = document.getElementById('message-box').value.trim();
+  if (!msg) { showToast('⚠️ Please type a message first!', '#e6a817'); return; }
+  const c = contacts.find(x => x.id === id);
+  if (!c) return;
+  window.open(buildLink(c.number, msg), '_blank');
+  sentToday++;
+  localStorage.setItem('nw_sent_today', sentToday);
+  updateStats();
+  showToast(`📨 Opened chat for ${c.name}`);
+}
+
+// ─── ADD / REMOVE ────────────────────────────────────────
+function addContact() {
+  const nameEl   = document.getElementById('new-name');
+  const numberEl = document.getElementById('new-number');
+  const name   = nameEl.value.trim();
+  const number = numberEl.value.trim();
+
+  if (!name || !number) { showToast('⚠️ Enter both name & number', '#e6a817'); return; }
+
+  const formatted = formatNumber(number);
+  if (formatted.length < 7) { showToast('⚠️ Invalid phone number', '#e6a817'); return; }
+
+  contacts.push({ id: nextId++, name, number: formatted });
+  nameEl.value = '';
+  numberEl.value = '';
+  renderContacts();
+  showToast(`✅ ${name} added!`);
+}
+
+function removeContact(id) {
+  const c = contacts.find(x => x.id === id);
+  if (!c) return;
+  if (!confirm(`Remove ${c.name}?`)) return;
+  contacts = contacts.filter(x => x.id !== id);
+  renderContacts();
+  showToast(`🗑️ ${c.name} removed`);
+}
+
+// ─── HELPERS ─────────────────────────────────────────────
+function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+function escHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+let toastTimer;
+function showToast(msg, color) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.color = color || 'var(--green)';
+  t.style.borderColor = color ? color + '66' : 'rgba(37,211,102,0.4)';
+  t.style.background = color ? '#1a1a0a' : '#1a3a2a';
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ─── EVENTS ──────────────────────────────────────────────
+document.getElementById('message-box').addEventListener('input', updateStats);
+
+// Enter to add contact
+document.getElementById('new-number').addEventListener('keydown', e => {
+  if (e.key === 'Enter') addContact();
+});
+document.getElementById('new-name').addEventListener('keydown', e => {
+  if (e.key === 'Enter') document.getElementById('new-number').focus();
+});
+
+// ─── INIT ─────────────────────────────────────────────────
+renderContacts();
+</script>
 </body>
 </html>
